@@ -1,18 +1,12 @@
 {
   "totalSeats": 50,
-  "availableSeats": 46,
+  "availableSeats": 47,
   "bookings": [
     {
-      "bookingId": "BOOK-1787228358041",
-      "customerName": "Nancy",
-      "seatsRequested": 2,
-      "timestamp": "2026-08-20T12:19:18.041Z"
-    },
-    {
-      "bookingId": "BOOK-1787228450652",
-      "customerName": "Nancy",
-      "seatsRequested": 2,
-      "timestamp": "2026-08-20T12:20:50.652Z"
+      "bookingId": "BOOK-1787229394229",
+      "customerName": "Rahul",
+      "seatsRequested": 3,
+      "timestamp": "2026-08-20T12:36:34.229Z"
     }
   ]
 }

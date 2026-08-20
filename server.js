@@ -34,6 +34,36 @@ app.post("/book-ticket", async (req, res) => {
 
     const { customerName, seatsRequested } = req.body;
 
+    // Validate customerName
+    if (!customerName) {
+      return res.status(400).json({ error: "customerName is required" });
+    }
+
+    if (typeof customerName !== "string") {
+      return res.status(400).json({ error: "customerName must be a string" });
+    }
+
+    if (customerName.trim().length === 0) {
+      return res.status(400).json({ error: "customerName cannot be empty" });
+    }
+
+    // Validate seatsRequested
+    if (seatsRequested === undefined || seatsRequested === null) {
+      return res.status(400).json({ error: "seatsRequested is required" });
+    }
+
+    if (typeof seatsRequested !== "number") {
+      return res.status(400).json({ error: "seatsRequested must be a number" });
+    }
+
+    if (!Number.isInteger(seatsRequested)) {
+      return res.status(400).json({ error: "seatsRequested must be a whole number" });
+    }
+
+    if (seatsRequested <= 0) {
+      return res.status(400).json({ error: "seatsRequested must be at least 1" });
+    }
+
     if (seatsRequested > event.availableSeats) {
       return res.status(400).json({ error: "Not enough seats available" });
     }
