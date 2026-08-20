@@ -1,12 +1,5 @@
 {
   "totalSeats": 50,
-  "availableSeats": 47,
-  "bookings": [
-    {
-      "bookingId": "BOOK-1787229394229",
-      "customerName": "Rahul",
-      "seatsRequested": 3,
-      "timestamp": "2026-08-20T12:36:34.229Z"
-    }
-  ]
+  "availableSeats": 50,
+  "bookings": []
 }
