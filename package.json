@@ -1,0 +1,15 @@
+{
+  "name": "smart-event-ticket-booking",
+  "version": "1.0.0",
+  "description": "A lightweight backend API for a stadium concert ticket booking system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
