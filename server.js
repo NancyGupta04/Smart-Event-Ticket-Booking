@@ -6,12 +6,11 @@ const PORT = 3000;
 
 app.use(express.json());
 
-// GET / — health check route
 app.get("/", (req, res) => {
   res.json({ message: "Smart Event Ticket Booking API is running" });
 });
 
-// GET /event-status — returns available seats and bookings
+
 app.get("/event-status", async (req, res) => {
   try {
     const data = await fs.promises.readFile("event.json", "utf-8");
@@ -26,21 +25,18 @@ app.get("/event-status", async (req, res) => {
   }
 });
 
-// POST /book-ticket — books tickets for a customer
+
 app.post("/book-ticket", async (req, res) => {
   try {
-    // Make sure request body was parsed
     if (!req.body) {
       return res.status(400).json({ error: "Request body is missing" });
     }
 
     const { customerName, seatsRequested } = req.body;
 
-    // Read current event data
     const data = await fs.promises.readFile("event.json", "utf-8");
     const event = JSON.parse(data);
 
-    // Validate customerName
     if (!customerName) {
       return res.status(400).json({ error: "customerName is required" });
     }
@@ -53,7 +49,6 @@ app.post("/book-ticket", async (req, res) => {
       return res.status(400).json({ error: "customerName cannot be empty" });
     }
 
-    // Validate seatsRequested
     if (seatsRequested === undefined || seatsRequested === null) {
       return res.status(400).json({ error: "seatsRequested is required" });
     }
@@ -74,10 +69,8 @@ app.post("/book-ticket", async (req, res) => {
       return res.status(400).json({ error: "Not enough seats available" });
     }
 
-    // Generate a unique booking ID using timestamp
     const bookingId = "BOOK-" + Date.now();
 
-    // Create the booking object
     const booking = {
       bookingId,
       customerName: customerName.trim(),
@@ -85,11 +78,9 @@ app.post("/book-ticket", async (req, res) => {
       timestamp: new Date().toISOString(),
     };
 
-    // Update available seats and add booking
     event.availableSeats -= seatsRequested;
     event.bookings.push(booking);
 
-    // Save updated data back to event.json
     await fs.promises.writeFile("event.json", JSON.stringify(event, null, 2));
 
     res.status(201).json({
